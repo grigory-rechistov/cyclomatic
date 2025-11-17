@@ -24,12 +24,20 @@ class TreeSitterNodeVisitor:
         LANGUAGE_MAPPING[cls.language_tag][-1] = cls
 
     def visit(self, node: tree_sitter.Node):
+        self.report_parsing_problems(node)
+
         method = 'visit_' + node.type
         # print("about to visit ", method)
         visitor = getattr(self, method, self.generic_visit)
         res = visitor(node)
         # print("exited ", method)
         return res
+
+    def report_parsing_problems(self, node):
+        if node.type == "ERROR":
+            lineno = node.start_point.row+1
+            warnings.warn(f"Failed to parse line {lineno}, expect"
+                          " under-reported complexity: " + node.text.decode())
 
     def generic_visit(self, node: tree_sitter.Node):
         for _node in node.children:
