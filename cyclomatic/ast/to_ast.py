@@ -5,6 +5,7 @@ from typing import Tuple
 
 import tree_sitter_python
 import tree_sitter_c
+import tree_sitter_cpp
 
 
 def to_ast(*, source: bytes = None, path: str = None, language=None) -> Tuple[Tree, str]:
@@ -39,8 +40,11 @@ def to_ast(*, source: bytes = None, path: str = None, language=None) -> Tuple[Tr
 
     PY_LANGUAGE = Language(tree_sitter_python.language())
     C_LANGUAGE = Language(tree_sitter_c.language())
+    CPP_LANGUAGE = Language(tree_sitter_cpp.language())
 
     detected_language = {"py": PY_LANGUAGE,
-                         "c": C_LANGUAGE}[language]
+                         "c": C_LANGUAGE,
+                         "cpp": CPP_LANGUAGE,
+                         }[language]
     parser = Parser(detected_language)
     return parser.parse(source), language

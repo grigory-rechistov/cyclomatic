@@ -9,4 +9,5 @@ package_path = pathlib.Path(cyclomatic.__file__).parent
 LANGUAGE_MAPPING = {
     'py': [None, 'python', None],
     'c': [None, 'c', None],
+    'cpp': [None, 'cpp', None],
 }
