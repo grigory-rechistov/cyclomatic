@@ -20,8 +20,8 @@ def cyclomatic_singly(target: Union[str, bytes], language=None) -> Optional[Bloc
     """get cyclomatic complexity of the target.
 
     The target could be a file path str, or bytes of source code.
-    This function will speculate the language according to the file suffix, but if source code provieded,
-    language type should be explicitly given.
+    This function will speculate the language according to the file suffix, but
+    if source code provided, language type should be explicitly given.
     """
     match target:
         case str(path):
