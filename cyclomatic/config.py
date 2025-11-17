@@ -4,10 +4,9 @@ import cyclomatic
 
 package_path = pathlib.Path(cyclomatic.__file__).parent
 
-# currently supported parser
-# Key is the language label.
-# Value is the path to the tree-sitter grammar repo ,
-# the language name in tree-sitter, and the calculator class
+# This mapping is dynamically updated on runtime when classes and modules are
+# loaded. Very nasty mechanism based on __init_subclass__ hook magic
 LANGUAGE_MAPPING = {
-    'py': [None, 'python', None]
+    'py': [None, 'python', None],
+    'c': [None, 'c', None],
 }
