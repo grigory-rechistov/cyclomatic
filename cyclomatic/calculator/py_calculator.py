@@ -38,7 +38,7 @@ class PyCalculator(TreeSitterNodeVisitor):
 
     def generic_visit(self, node: tree_sitter.Node):
         if node.type in self.decision_stmts:
-            # if decision statment found, add one to the current_block.score
+            # if decision statement found, add one to the current_block.score
             self.current_block.score += 1
 
         for _node in node.children:
