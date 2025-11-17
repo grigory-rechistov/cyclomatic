@@ -9,7 +9,8 @@ _logger = logging.getLogger(__name__)
 
 
 class PyCalculator(TreeSitterNodeVisitor):
-    """calculate the cyclomatic complexity. cyclomatic complexity = num of decision points + 1"""
+    """calculate the cyclomatic complexity. cyclomatic complexity = num of
+    decision points + 1"""
 
     language_tag = 'py'
 
