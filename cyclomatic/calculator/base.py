@@ -25,8 +25,11 @@ class TreeSitterNodeVisitor:
 
     def visit(self, node: tree_sitter.Node):
         method = 'visit_' + node.type
+        # print("about to visit ", method)
         visitor = getattr(self, method, self.generic_visit)
-        return visitor(node)
+        res = visitor(node)
+        # print("exited ", method)
+        return res
 
     def generic_visit(self, node: tree_sitter.Node):
         for _node in node.children:
