@@ -9,12 +9,12 @@ _logger = logging.getLogger(__name__)
 
 
 class PyCalculator(TreeSitterNodeVisitor):
-    """calculate the cyclomatic complexity. cyclomatic complexity = num of decesion points + 1"""
+    """calculate the cyclomatic complexity. cyclomatic complexity = num of decision points + 1"""
 
     language_tag = 'py'
 
-    # decesion point pattern
-    decesion_stmts = (
+    # decision point pattern
+    decision_stmts = (
         'if_statement',
         'elif_clause',
         'else_clause',
@@ -36,8 +36,8 @@ class PyCalculator(TreeSitterNodeVisitor):
         return None
 
     def generic_visit(self, node: tree_sitter.Node):
-        if node.type in self.decesion_stmts:
-            # if decesion statment found, add one to the current_block.score
+        if node.type in self.decision_stmts:
+            # if decision statment found, add one to the current_block.score
             self.current_block.score += 1
 
         for _node in node.children:
@@ -51,7 +51,7 @@ class PyCalculator(TreeSitterNodeVisitor):
         self.generic_visit(node)
         self.block_stack.pop()
         sub_score = sum([b.score for b in block.sub_blocks])
-        # when the traverse completes, block.score is the num of decesion point
+        # when the traverse completes, block.score is the num of decision point
         block.score += sub_score + 1
         self.block = block
 
@@ -66,7 +66,7 @@ class PyCalculator(TreeSitterNodeVisitor):
         self.block_stack.pop()
         sub_score = sum([b.score for b in block.sub_blocks])
 
-        # when the traverse completes, block.score is the num of decesion point
+        # when the traverse completes, block.score is the num of decision point
         block.score += sub_score + 1
 
     def visit_function_definition(self, node: tree_sitter.Node):
@@ -78,6 +78,6 @@ class PyCalculator(TreeSitterNodeVisitor):
         self.block_stack.append(block)
         self.generic_visit(node)
         self.block_stack.pop()
-        # when the traverse completes, block.score is the num of decesion point
+        # when the traverse completes, block.score is the num of decision point
         sub_score = sum([b.score for b in block.sub_blocks])
         block.score += sub_score + 1

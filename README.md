@@ -42,7 +42,7 @@ result = cyclomatic_in_parallel(str(package_path))
 - The cyclomatic complexity is equal to the num of decision point plus one.
 This package use two steps to calculate it:
   1. generates ast from the source code with the help of tree-sitter
-  2. walks the ast and counts the num of decesion points
+  2. walks the ast and counts the num of decision points
 
 - package structure:
   1. cyclomatic.ast is responsable for ast generation.
