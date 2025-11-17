@@ -3,10 +3,9 @@ from tree_sitter import (Language, Parser, Tree)
 from cyclomatic.config import package_path, LANGUAGE_MAPPING
 from typing import Tuple
 
+import tree_sitter_python as tspython
 
-SO_PATH = str(package_path / 'ast' / 'tree_sitter_binding.so')
-Language.build_library(SO_PATH, [str(s[0]) for s in LANGUAGE_MAPPING.values()])
-
+PY_LANGUAGE = Language(tspython.language())
 
 def to_ast(*, source: bytes = None, path: str = None, language=None) -> Tuple[Tree, str]:
     """
@@ -38,7 +37,5 @@ def to_ast(*, source: bytes = None, path: str = None, language=None) -> Tuple[Tr
             "to_ast(source=b'def fun():\n    return 0')\n"
         )
 
-    tree_sitter_lang = Language(SO_PATH, LANGUAGE_MAPPING[language][1])
-    parser = Parser()
-    parser.set_language(tree_sitter_lang)
+    parser = Parser(PY_LANGUAGE)
     return parser.parse(source), language
