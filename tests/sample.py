@@ -5,3 +5,8 @@ if a==b:
 
 class Foo:
     pass
+
+
+def func():
+    if True == False:
+        pass
