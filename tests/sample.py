@@ -1,3 +1,7 @@
 
 if a==b:
-   #pass
+    pass
+
+
+class Foo:
+    pass

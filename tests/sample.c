@@ -10,5 +10,9 @@ int main() {
     if (a == b) {
         return 1;
     }
+    if (a > b) {
+        return 2;
+    }
+
     return 0;
 }
