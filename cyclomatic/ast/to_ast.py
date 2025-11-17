@@ -1,6 +1,6 @@
 import pathlib
 from tree_sitter import (Language, Parser, Tree)
-from cyclomatic.config import package_path, LANGUAGE_MAPPING
+from cyclomatic.config import LANGUAGE_MAPPING
 from typing import Tuple
 
 import tree_sitter_python
