@@ -11,7 +11,7 @@ class TreeSitterNodeVisitor:
 
     def __init_subclass__(cls, **kwargs):
         # auto register calculator into the language mapping,
-        # so the top level api cloud auto use the corresponding calculator
+        # so the top level api could auto use the corresponding calculator
         if cls.language_tag is None:
             raise Exception(f'calculator:{cls} does not have the language_tag property.')
         if cls.language_tag not in LANGUAGE_MAPPING:
