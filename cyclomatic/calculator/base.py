@@ -15,11 +15,8 @@ class TreeSitterNodeVisitor:
         if cls.language_tag is None:
             raise Exception(f'calculator:{cls} does not have the language_tag property.')
         if cls.language_tag not in LANGUAGE_MAPPING:
-            warnings.warn(
-                f'language_tag:{cls.language_tag} does not have the corresponding tree-sitter parser',
-                Warning
-            )
-            return
+            raise Exception(f"language_tag:{cls.language_tag} does not have"
+                            " corresponding tree-sitter parser")
 
         LANGUAGE_MAPPING[cls.language_tag][-1] = cls
 
