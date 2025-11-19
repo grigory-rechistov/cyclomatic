@@ -72,5 +72,6 @@ def determine_root_dir(argv):
         repo_dir = "."
     return repo_dir
 
+
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
