@@ -32,7 +32,6 @@ def main(argv):
     wildcards = tuple(extension_to_file_type.keys())
     cmd = ("git", "ls-files") + wildcards
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
-                         stderr=subprocess.STDOUT,
                          cwd=repo_dir)
 
     datapoints = []
