@@ -6,6 +6,10 @@ from cyclomatic.cyclomatic import cyclomatic_singly
 from churn_one_file import get_churn
 from pathlib import Path
 
+# Ignore parsers defects
+#import warnings
+# warnings.filterwarnings("ignore", category=UserWarning)
+
 def one_file(path):
     res = cyclomatic_singly(path)
     return res.score
