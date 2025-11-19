@@ -22,30 +22,19 @@ extension_to_file_type = {
 
 
 def main(argv):
-    if len(argv) > 1:
-        repo_dir = sys.argv[1]
-    else:
-        repo_dir = "."
+    repo_dir = determine_root_dir(argv)
 
     wildcards = tuple(extension_to_file_type.keys())
-
     cmd = ("git", "ls-files") + wildcards
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
                          stderr=subprocess.STDOUT,
                          cwd=repo_dir)
 
     for line in p.stdout:
-        filename = line.decode().strip()
-        full_filename = os.path.join(repo_dir, filename)
-        extension = Path(full_filename).suffix
-        language = extension_to_file_type['*' + extension]
-
-        cc = cyclomatic_singly(full_filename, language=language).score
-        churn = get_churn(full_filename)
+        filename, cc, churn = analyse_file(repo_dir, line)
         print(f"{filename} {cc} {churn}")
 
-    p.wait()
-    status = p.poll()
+    status = p.wait()
     p.stdout.close()
 
     # TODO: plot the data
@@ -63,6 +52,25 @@ def main(argv):
 
 
     return status
+
+
+def analyse_file(repo_dir, line):
+    filename = line.decode().strip()
+    full_filename = os.path.join(repo_dir, filename)
+    extension = Path(full_filename).suffix
+    language = extension_to_file_type['*' + extension]
+
+    cc = cyclomatic_singly(full_filename, language=language).score
+    churn = get_churn(full_filename)
+    return filename, cc, churn
+
+
+def determine_root_dir(argv):
+    if len(argv) > 1:
+        repo_dir = sys.argv[1]
+    else:
+        repo_dir = "."
+    return repo_dir
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
