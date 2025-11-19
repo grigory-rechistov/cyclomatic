@@ -40,7 +40,17 @@ class TreeSitterNodeVisitor:
         for _node in node.children:
             if _node.is_named:
                 self.visit(_node)
-
+    
+    def visit_ERROR(self, node: tree_sitter.Node):
+        block = Block(self.id, (0, 0))
+        self.id += 1
+        self.block_stack.append(block)
+        self.generic_visit(node)
+        self.block_stack.pop()
+        sub_score = sum([b.score for b in block.sub_blocks])
+        # when the traverse completes, block.score is the num of decision point
+        block.score += sub_score
+        self.block = block
 
 @dataclasses.dataclass
 class Block:
