@@ -34,7 +34,8 @@ class TreeSitterNodeVisitor:
         if node.type == "ERROR":
             lineno = node.start_point.row+1
             warnings.warn(f"Failed to parse line {lineno}, expect"
-                          " under-reported complexity: " + node.text.decode(errors="ignore"))
+                          " under-reported complexity: " +
+                          node.text.decode(errors="ignore")[:80])
 
     def generic_visit(self, node: tree_sitter.Node):
         for _node in node.children:
