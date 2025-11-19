@@ -12,7 +12,7 @@ fetched by `pip3` into the virtual environment (see steps below).
 
 1. `git` command line utility to calculate churn.
 2. Tree-Sitter for parsing and walking over source files.
-3. Matplotlib for visualising results.
+3. Matplotlib for visualizing results.
 
 ## Installing the tool and its dependencies
 
