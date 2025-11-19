@@ -14,6 +14,7 @@ def one_file(path):
     res = cyclomatic_singly(path)
     return res.score
 
+
 extension_to_file_type = {
     '*.py': 'py',
     '*.c': 'c',
@@ -34,26 +35,16 @@ def main(argv):
                          stderr=subprocess.STDOUT,
                          cwd=repo_dir)
 
+    datapoints = []
     for line in p.stdout:
         filename, cc, churn = analyse_file(repo_dir, line)
         print(f"{filename} {cc} {churn}")
+        datapoints.append((filename, cc, churn))
 
     status = p.wait()
     p.stdout.close()
 
-    # TODO: plot the data
-
-# x = [1,2,3]
-# y = [4,5,6]
-
-
-# plt.scatter(x, y)
-
-# plt.annotate('ey', xy= (2,5), textcoords='data')
-
-# plt.savefig("churn-vs-complexity.svg")
-# # plt.show()
-
+    save_churn_complexity(os.path.realpath(repo_dir), datapoints)
 
     return status
 
@@ -75,6 +66,24 @@ def determine_root_dir(argv):
     else:
         repo_dir = "."
     return repo_dir
+
+
+def save_churn_complexity(project, datapoints):
+
+    x_s = list(cc for (filename, cc, churn) in datapoints)
+    y_s = list(churn for (filename, cc, churn) in datapoints)
+
+    fig, dia = plt.subplots()
+    dia.scatter(x_s, y_s)
+
+    dia.set_title(f'CC-Churn diagram for {project}')
+    dia.set_xlabel('Cyclomatic complexity')
+    dia.set_ylabel('Churn')
+
+    for (filename, cc, churn) in datapoints:
+        dia.annotate(filename, xy=(cc, churn), textcoords='data')
+
+    plt.savefig("churn-vs-complexity.svg")
 
 
 if __name__ == "__main__":
