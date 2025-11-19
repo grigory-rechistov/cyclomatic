@@ -11,6 +11,7 @@ def main(path):
     churn = sum(1 for _ in p.stdout)
     p.wait()
     status = p.poll()
+    p.stdout.close()
     if status != 0:
         print(f"git failed with error code {status}", file=sys.stderr)
         return 1
