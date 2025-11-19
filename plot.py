@@ -39,7 +39,8 @@ def main(argv):
     for line in p.stdout:
         datapoint = analyse_file(repo_dir, line)
         print("{%s} {%d} {%d}" % datapoint)
-        datapoints.append(datapoint)
+        if is_datapoint_worthy(datapoint):
+            datapoints.append(datapoint)
 
     status = p.wait()
     p.stdout.close()
@@ -47,6 +48,15 @@ def main(argv):
     save_churn_complexity(os.path.realpath(repo_dir), datapoints)
 
     return status
+
+
+def is_datapoint_worthy(datapoint) -> bool:
+    _, cc, churn = datapoint
+
+    # Filter out obvious files and files likely outside of the repo
+    complexity_threshold = 1
+    churn_threshold = 0
+    return cc > complexity_threshold and churn > churn_threshold
 
 
 def analyse_file(repo_dir, line):
