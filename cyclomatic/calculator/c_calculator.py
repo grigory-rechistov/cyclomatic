@@ -56,7 +56,6 @@ class CeeCalculator(TreeSitterNodeVisitor):
         self.block = block
 
     def visit_function_definition(self, node: tree_sitter.Node):
-        # breakpoint()
         name_node = node.child_by_field_name('declarator')
         block = Block(id=self.id, name_pos=(name_node.start_byte, name_node.end_byte))
         self.id += 1
