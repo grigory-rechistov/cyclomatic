@@ -19,24 +19,29 @@ fetched by `pip3` into the virtual environment (see steps below).
 0. Clone this repository, enter its top folder in command line shell.
 
 1. Create and activate virtual environment:
-
-    python3 -m venv .venv
-    source .venv/bin/activate
+```
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
 2. (Optional, required if you are behind firewall) Set up network proxy to be able to fetch dependencies:
-
-    export https_proxy=<your-proxy>
+```
+export https_proxy=your-proxy.com:port
+```
 
 3. Install dependencies:
-
-    pip3 install -r requirements.txt
+```
+pip3 install -r requirements.txt
+```
 
 ## Invocation
 
 Run `plot.py` on a folder with a Git repository.
 E.g., to analyze the project itself as a smoke test:
 
-    python3 ./plot.py .
+```
+python3 ./plot.py .
+```
 
 This should print one line per analysed file in format `file-name cyclic-complexity churn`.
 
