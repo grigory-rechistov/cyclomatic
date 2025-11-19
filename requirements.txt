@@ -1,0 +1,5 @@
+matplotlib
+tree-sitter
+tree-sitter-python
+tree-sitter-c
+tree-sitter-cpp
