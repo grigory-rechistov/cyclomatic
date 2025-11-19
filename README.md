@@ -1,3 +1,21 @@
+# Cyclomatic Complexity vs Churn plot generator
+
+## Installing and dependencies
+
+
+## Invocation
+
+To analyze a git repository with Python, C and C++ files, use:
+
+```
+python3 plot.py <path-to-top-level-folder>
+```
+
+When completed, it puts file called `churn-vs-complexity.svg` into current folder.
+
+
+# Original README
+
 ## Feature:
 > python 3.10.0 is required
 1. calculate cyclomatic complexity of a program (python)
