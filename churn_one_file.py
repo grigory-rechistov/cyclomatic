@@ -13,8 +13,7 @@ def get_churn(path: str) -> int:
     cmd = ("git", "log", "--oneline", "--", file)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, cwd=cwd)
     churn = sum(1 for _ in p.stdout)
-    p.wait()
-    status = p.poll()
+    status = p.wait()
     p.stdout.close()
     if status != 0:
         raise RuntimeError(f"git failed with error code {status}")
