@@ -27,7 +27,7 @@ class TreeSitterNodeVisitor:
         # print("about to visit ", method)
         visitor = getattr(self, method, self.generic_visit)
         res = visitor(node)
-        # print("exited ", method)
+        # print("exited ", method, node.start_point.row + 1, "<")
         return res
 
     def report_parsing_problems(self, node):
