@@ -37,9 +37,9 @@ def main(argv):
 
     datapoints = []
     for line in p.stdout:
-        filename, cc, churn = analyse_file(repo_dir, line)
-        print(f"{filename} {cc} {churn}")
-        datapoints.append((filename, cc, churn))
+        datapoint = analyse_file(repo_dir, line)
+        print("{%s} {%d} {%d}" % datapoint)
+        datapoints.append(datapoint)
 
     status = p.wait()
     p.stdout.close()
