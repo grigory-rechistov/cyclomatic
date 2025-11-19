@@ -38,7 +38,7 @@ def main(argv):
     datapoints = []
     for line in p.stdout:
         datapoint = analyse_file(repo_dir, line)
-        print("{%s} {%d} {%d}" % datapoint)
+        print("%s %d %d" % datapoint)
         if is_datapoint_worthy(datapoint):
             datapoints.append(datapoint)
 
