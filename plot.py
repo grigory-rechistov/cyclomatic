@@ -77,6 +77,11 @@ def determine_root_dir(argv):
     return repo_dir
 
 
+def add_labels(datapoints, dia):
+    for (filename, cc, churn) in datapoints:
+        dia.annotate(filename, xy=(cc, churn), textcoords='data')
+
+
 def save_churn_complexity(project, datapoints):
 
     x_s = list(cc for (filename, cc, churn) in datapoints)
@@ -89,9 +94,9 @@ def save_churn_complexity(project, datapoints):
     dia.set_xlabel('Cyclomatic complexity')
     dia.set_ylabel('Churn')
 
-    for (filename, cc, churn) in datapoints:
-        dia.annotate(filename, xy=(cc, churn), textcoords='data')
+    plt.savefig("churn-vs-complexity-notext.svg")
 
+    add_labels(datapoints, dia)
     plt.savefig("churn-vs-complexity.svg")
 
 
