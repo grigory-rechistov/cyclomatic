@@ -26,6 +26,15 @@ extension_to_file_type = {
 }
 
 
+def cautiously_analyze_file(repo_dir, line):
+    try:
+        datapoint = analyse_file(repo_dir, line)
+    except:
+        print("Died analyzing", line)
+        raise
+    return datapoint
+
+
 def main(argv):
     repo_dir = determine_root_dir(argv)
 
@@ -36,7 +45,7 @@ def main(argv):
 
     datapoints = []
     for line in p.stdout:
-        datapoint = analyse_file(repo_dir, line)
+        datapoint = cautiously_analyze_file(repo_dir, line)
         print("%s %d %d" % datapoint)
         if is_datapoint_worthy(datapoint):
             datapoints.append(datapoint)
