@@ -14,6 +14,7 @@ def one_file(path):
     res = cyclomatic_singly(path)
     return res.score
 
+
 L_PY = 'py'
 L_C = 'c'
 L_CPP = 'cpp'
@@ -26,6 +27,8 @@ extension_to_file_type = {
     '*.h': L_CPP,
     '*.hpp': L_CPP,
     '*.C': L_CPP,
+    '*.dml': L_CPP,
+    '*.sg': L_CPP,
 }
 
 
@@ -99,7 +102,6 @@ def add_labels(datapoints, dia):
 
 
 def save_churn_complexity(project, datapoints):
-
     x_s = list(cc for (filename, cc, churn) in datapoints)
     y_s = list(churn for (filename, cc, churn) in datapoints)
 
