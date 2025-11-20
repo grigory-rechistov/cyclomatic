@@ -14,15 +14,18 @@ def one_file(path):
     res = cyclomatic_singly(path)
     return res.score
 
+L_PY = 'py'
+L_C = 'c'
+L_CPP = 'cpp'
 
 extension_to_file_type = {
-    '*.py': 'py',
-    '*.c': 'c',
-    '*.cpp': 'cpp',
-    '*.cc': 'cpp',
-    '*.h': 'cpp',
-    '*.hpp': 'cpp',
-    '*.C': 'cpp'
+    '*.py': L_PY,
+    '*.c': L_C,
+    '*.cpp': L_CPP,
+    '*.cc': L_CPP,
+    '*.h': L_CPP,
+    '*.hpp': L_CPP,
+    '*.C': L_CPP,
 }
 
 
@@ -67,11 +70,15 @@ def is_datapoint_worthy(datapoint) -> bool:
     return cc > complexity_threshold and churn > churn_threshold
 
 
+def detect_parser_language(full_filename):
+    extension = Path(full_filename).suffix
+    language = extension_to_file_type['*' + extension]
+    return language
+
 def analyse_file(repo_dir, line):
     filename = line.decode().strip()
     full_filename = os.path.join(repo_dir, filename)
-    extension = Path(full_filename).suffix
-    language = extension_to_file_type['*' + extension]
+    language = detect_parser_language(full_filename)
 
     cc = cyclomatic_singly(full_filename, language=language).score
     churn = get_churn(full_filename)
