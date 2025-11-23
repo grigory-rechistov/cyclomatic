@@ -15,7 +15,7 @@ class CeeCalculator(TreeSitterNodeVisitor):
         'while_statement',
         'for_statement',
         'except_clause',
-        'switch_statement',
+        'case_statement',
 
     )
 
