@@ -35,3 +35,15 @@ def test_cc_of_switch_with_three_cases_is_four():
         return 0;
     }"""
     assert get_cc_from_text(code) == 4
+
+
+def test_cc_of_switch_with_default_is_two():
+    code = """int foobar(char a)
+    {
+        switch(a) {
+        default:
+            break;
+        return 0;
+        }
+    }"""
+    assert get_cc_from_text(code) == 2
