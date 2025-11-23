@@ -10,3 +10,17 @@ def test_cc_of_empty_function_is_one():
     c.visit(tree.root_node)
 
     assert c.block.score == 1
+
+
+def test_cc_of_if_inside_function_is_two():
+    code = """int foobar(char a)
+    {
+        if (a > 5) {return 4;}
+    }"""
+
+    tree, _ = to_ast(source=code.encode('utf-8'), language='cpp')
+    c = CppCalculator()
+    c.visit(tree.root_node)
+
+    assert c.block.score == 2
+
