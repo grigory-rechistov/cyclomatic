@@ -16,7 +16,7 @@ class CppCalculator(TreeSitterNodeVisitor):
         'for_statement',
         'except_clause',
         'case_statement',
-
+        "catch_clause",
     )
 
     def __init__(self):
