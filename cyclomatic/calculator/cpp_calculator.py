@@ -5,9 +5,6 @@ from cyclomatic.calculator.base import TreeSitterNodeVisitor, Block
 
 
 class CppCalculator(TreeSitterNodeVisitor):
-    """calculate the cyclomatic complexity. cyclomatic complexity = num of
-    decision points + 1"""
-
     language_tag = 'cpp'
 
     # decision point pattern
