@@ -11,7 +11,7 @@ from cyclomatic import (
 package_path = pathlib.Path(cyclomatic.__file__).parent
 
 
-def test_cyclomatic_signle():
+def test_cyclomatic_single():
     # test single file path as input
     result = cyclomatic_singly(str(package_path / 'cyclomatic.py'))
     assert result
