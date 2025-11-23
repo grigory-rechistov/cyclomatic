@@ -21,6 +21,7 @@ def test_cc_of_if_inside_function_is_two():
     }"""
     assert get_cc_from_text(code) == 2
 
+
 def test_cc_of_switch_with_three_cases_is_four():
     code = """int foobar(char a)
     {
