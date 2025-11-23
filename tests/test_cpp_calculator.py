@@ -47,3 +47,16 @@ def test_cc_of_switch_with_default_is_two():
         }
     }"""
     assert get_cc_from_text(code) == 2
+
+
+def test_cc_of_try_catch_is_two():
+    code = """int main() {
+    try {
+        cout << "1";
+    }
+    catch (int num) {
+        cout << "2";
+    }
+    return 0;
+}"""
+    assert get_cc_from_text(code) == 2
