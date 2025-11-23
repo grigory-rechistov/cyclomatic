@@ -18,7 +18,7 @@ class CppCalculator(TreeSitterNodeVisitor):
         'while_statement',
         'for_statement',
         'except_clause',
-        'switch_statement',
+        'case_statement',
 
     )
 
@@ -35,7 +35,7 @@ class CppCalculator(TreeSitterNodeVisitor):
         return None
 
     def generic_visit(self, node: tree_sitter.Node):
-        # print(node.type, node.start_point.row+1)
+        print(node.type, node.start_point.row+1)
         if node.type in self.decision_stmts:
             # if decision statement found, add one to the current_block.score
             self.current_block.score += 1
