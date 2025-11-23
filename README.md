@@ -43,7 +43,7 @@ E.g., to analyze the project itself as a smoke test:
 python3 ./plot.py .
 ```
 
-This should print one line per analysed file in format `file-name cyclic-complexity churn`.
+This should print one line per analyzed file in format `file-name cyclic-complexity churn`.
 
 At the end, it should generate a new SVG file `churn-vs-complexity.svg`.
 You can open that SVG in your browser as a picture.
