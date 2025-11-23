@@ -1,3 +1,4 @@
+import pytest
 from cyclomatic.calculator.cpp_calculator import CppCalculator
 from cyclomatic.ast.to_ast import to_ast
 
@@ -20,6 +21,7 @@ def test_cc_of_if_inside_function_is_two():
         if (a > 5) {return 4;}
     }"""
     assert get_cc_from_text(code) == 2
+
 
 def test_cc_of_switch_with_three_cases_is_four():
     code = """int foobar(char a)
@@ -60,3 +62,20 @@ def test_cc_of_try_catch_is_two():
     return 0;
 }"""
     assert get_cc_from_text(code) == 2
+
+@pytest.mark.filterwarnings("ignore:Failed to parse")
+def test_cc_of_undisciplined_ifdef():
+    code = """int foobar(char a) {
+    if (a > 0) {
+        return 3
+#ifdef FOO
+        + a;
+    } else if (a < 0) {
+        return 7;
+#else
+        + 5;
+#endif
+    }
+        return 0;
+}"""
+    assert get_cc_from_text(code) == 4
